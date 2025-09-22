@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Habitat DAO - Solving Homelessness</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      color: #2d3748;
+      background: #ffffff;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Hero Section */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(135deg, #e6f7ff 0%, #f0f9ff 50%, #fff4e6 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%2387ceeb20" points="0,0 1000,300 1000,1000 0,700"/></svg>');
+      animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(1deg); }
+    }
+
+    .hero-content {
+      z-index: 2;
+      position: relative;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    #hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(45deg, #4a90e2, #50c878);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+      text-shadow: 2px 2px 4px rgba(26, 54, 93, 0.3);
+      filter: drop-shadow(2px 2px 4px rgba(26, 54, 93, 0.3));
+    }
+
+    #hero p {
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      margin-bottom: 2.5rem;
+      color: #2d3748;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      text-shadow: 1px 1px 2px rgba(26, 54, 93, 0.2);
+      font-weight: 500;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid #1a365d;
+    }
+
+    .btn-primary {
+      background: linear-gradient(45deg, #50c878, #90ee90);
+      color: white;
+      box-shadow: 0 10px 30px rgba(80, 200, 120, 0.3);
+      text-shadow: 1px 1px 2px rgba(26, 54, 93, 0.5);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #1a365d;
+      border: 3px solid #4a90e2;
+      box-shadow: 0 10px 30px rgba(74, 144, 226, 0.4);
+      font-weight: 700;
+      text-shadow: 1px 1px 2px rgba(26, 54, 93, 0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      background: #f8f9fa;
+    }
+
+    .btn-secondary:hover {
+      box-shadow: 0 15px 40px rgba(135, 206, 235, 0.5);
+    }
+
+    /* Section Styles */
+    section {
+      padding: 5rem 0;
+      position: relative;
+    }
+
+    /* Light sections (default) */
+    section:nth-child(odd) {
+      background: linear-gradient(135deg, #f8fcff 0%, #f0f9ff 100%);
+    }
+
+    /* Dark sections with gradient backgrounds */
+    section:nth-child(even) {
+      background: linear-gradient(135deg, rgba(74, 144, 226, 0.85) 0%, rgba(80, 200, 120, 0.85) 100%);
+      color: white;
+    }
+
+    section:nth-child(even) h2 {
+      color: white;
+      text-shadow: 2px 2px 4px rgba(26, 54, 93, 0.8);
+      background: linear-gradient(45deg, #ffffff, #e6f7ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(2px 2px 4px rgba(26, 54, 93, 0.5));
+    }
+
+    section:nth-child(even) p {
+      color: #f0f9ff;
+      text-shadow: 1px 1px 2px rgba(26, 54, 93, 0.6);
+    }
+
+    section h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 2rem;
+      text-align: center;
+      background: linear-gradient(45deg, #4a90e2, #50c878);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 2px 2px 4px rgba(26, 54, 93, 0.3);
+      filter: drop-shadow(2px 2px 4px rgba(26, 54, 93, 0.3));
+    }
+
+    section p {
+      font-size: 1.2rem;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 3rem;
+      color: #5a6c7d;
+      text-shadow: 1px 1px 2px rgba(26, 54, 93, 0.2);
+    }
+
+    /* Solution Cards */
+    .solution-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .solution-card {
+      background: linear-gradient(135deg, rgba(135, 206, 235, 0.1), rgba(240, 249, 255, 0.8));
+      padding: 3rem 2rem;
+      border-radius: 20px;
+      text-align: center;
+      border: 2px solid rgba(26, 54, 93, 0.3);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 5px 20px rgba(26, 54, 93, 0.15);
+    }
+
+    /* Dark section cards */
+    section:nth-child(even) .solution-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(240, 249, 255, 0.1));
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      color: white;
+    }
+
+    section:nth-child(even) .solution-card h3 {
+      color: white;
+      text-shadow: 1px 1px 2px rgba(26, 54, 93, 0.8);
+    }
+
+    section:nth-child(even) .solution-card p {
+      color: #f0f9ff;
+      text-shadow: 1px 1px 2px rgba(26, 54, 93, 0.6);
+    }
+
+    .solution-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(26, 54, 93, 0.3);
+      border-color: rgba(80, 200, 120, 0.6);
+      background: linear-gradient(135deg, rgba(80, 200, 120, 0.2), rgba(135, 206, 235, 0.2));
+    }
+
+    section:nth-child(even) .solution-card:hover {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(240, 249, 255, 0.2));
+      border-color: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .solution-card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #2d3748;
+      text-shadow: 1px 1px 2px rgba(26, 54, 93, 0.3);
+    }
+
+    .solution-card p {
+      font-size: 1rem;
+      color: #5a6c7d;
+      text-align: center;
+      margin: 0;
+      text-shadow: 1px 1px 2px rgba(26, 54, 93, 0.2);
+    }
+
+    /* Token System */
+    .token-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    .token-card {
+      padding: 3rem;
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(26, 54, 93, 0.2);
+      transition: all 0.3s ease;
+      border: 2px solid rgba(26, 54, 93, 0.3);
+    }
+
+    .token-card:first-child {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
+      color: #2d6a4f;
+    }
+
+    .token-card:last-child {
+      background: linear-gradient(135deg, #ffd700, #ffeb3b);
+      color: #2d3748;
+    }
+
+    section:nth-child(even) .token-card {
+      border: 2px solid rgba(255, 255, 255, 0.4);
+    }
+
+    section:nth-child(even) .token-card:first-child {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+      color: white;
+    }
+
+    section:nth-child(even) .token-card h3 {
+      color: white;
+      text-shadow: 1px 1px 2px rgba(26, 54, 93, 0.8);
+    }
+
+    section:nth-child(even) .token-card p {
+      color: #f0f9ff;
+      text-shadow: 1px 1px 2px rgba(26, 54, 93, 0.6);
+    }
+
+    .token-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .token-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 50px rgba(26, 54, 93, 0.25);
+    }
+
+    .token-card:hover::before {
+      opacity: 1;
+    }
+
+    .token-card h3 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-shadow: 1px 1px 2px rgba(26, 54, 93, 0.3);
+    }
+
+    .token-card p {
+      font-size: 1.1rem;
+      text-align: left;
+      margin: 0;
+      text-shadow: 1px 1px 2px rgba(26, 54, 93, 0.2);
+    }
+
+    /* Legal Framework */
+    #legal ul {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    #legal li {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(240, 249, 255, 0.1));
+      margin: 1rem 0;
+      padding: 1.5rem;
+      border-radius: 15px;
+      border-left: 4px solid #ffffff;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      color: #f0f9ff;
+      box-shadow: 0 3px 10px rgba(26, 54, 93, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      text-shadow: 1px 1px 2px rgba(26, 54, 93, 0.6);
+    }
+
+    #legal li:hover {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(135, 206, 235, 0.3));
+      transform: translateX(10px);
+      box-shadow: 0 5px 20px rgba(26, 54, 93, 0.4);
+      border-color: rgba(26, 54, 93, 0.6);
+      color: #1a365d;
+    }
+
+    /* Roadmap */
+    #roadmap ol {
+      max-width: 800px;
+      margin: 0 auto;
+      counter-reset: roadmap-counter;
+    }
+
+    #roadmap li {
+      background: linear-gradient(135deg, rgba(135, 206, 235, 0.1), rgba(240, 249, 255, 0.8));
+      margin: 2rem 0;
+      padding: 2rem;
+      border-radius: 15px;
+      position: relative;
+      counter-increment: roadmap-counter;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      color: #2d3748;
+      box-shadow: 0 5px 15px rgba(26, 54, 93, 0.15);
+      border: 2px solid rgba(26, 54, 93, 0.2);
+      text-shadow: 1px 1px 2px rgba(26, 54, 93, 0.2);
+    }
+
+    #roadmap li::before {
+      content: counter(roadmap-counter);
+      position: absolute;
+      left: -1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: linear-gradient(45deg, #ffd700, #ffeb3b);
+      color: #1a365d;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+      box-shadow: 0 5px 15px rgba(26, 54, 93, 0.4);
+      border: 2px solid #1a365d;
+      text-shadow: 1px 1px 2px rgba(26, 54, 93, 0.5);
+    }
+
+    #roadmap li:hover {
+      transform: translateX(20px);
+      box-shadow: 0 10px 30px rgba(26, 54, 93, 0.3);
+      background: linear-gradient(135deg, rgba(80, 200, 120, 0.2), rgba(135, 206, 235, 0.2));
+      border-color: rgba(80, 200, 120, 0.4);
+    }
+
+    /* Impact Metrics */
+    .impact-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 235, 59, 0.1));
+      border-radius: 20px;
+      border: 2px solid rgba(26, 54, 93, 0.3);
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(26, 54, 93, 0.15);
+    }
+
+    section:nth-child(even) .stat-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 235, 59, 0.1));
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(26, 54, 93, 0.3);
+      border-color: rgba(80, 200, 120, 0.6);
+    }
+
+    section:nth-child(even) .stat-card:hover {
+      border-color: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(45deg, #50c878, #4a90e2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: block;
+      text-shadow: 2px 2px 4px rgba(26, 54, 93, 0.3);
+      filter: drop-shadow(2px 2px 4px rgba(26, 54, 93, 0.3));
+    }
+
+    section:nth-child(even) .stat-number {
+      background: linear-gradient(45deg, #ffffff, #e6f7ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(2px 2px 4px rgba(26, 54, 93, 0.8));
+    }
+
+    .stat-label {
+      font-size: 1.1rem;
+      color: #5a6c7d;
+      margin-top: 0.5rem;
+      text-shadow: 1px 1px 2px rgba(26, 54, 93, 0.2);
+    }
+
+    section:nth-child(even) .stat-label {
+      color: #f0f9ff;
+      text-shadow: 1px 1px 2px rgba(26, 54, 93, 0.6);
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(135deg, #f0f9ff, #e6f7ff);
+      padding: 4rem 0 2rem;
+      text-align: center;
+      border-top: 2px solid rgba(26, 54, 93, 0.3);
+    }
+
+    footer p {
+      color: #2d3748;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      text-shadow: 1px 1px 2px rgba(26, 54, 93, 0.2);
+    }
+
+    .newsletter {
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .newsletter input {
+      flex: 1;
+      min-width: 250px;
+      padding: 1rem;
+      border: 2px solid #1a365d;
+      border-radius: 50px;
+      background: white;
+      color: #2d3748;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 10px rgba(26, 54, 93, 0.2);
+    }
+
+    .newsletter input::placeholder {
+      color: #a0aec0;
+    }
+
+    .newsletter input:focus {
+      outline: none;
+      border-color: #50c878;
+      box-shadow: 0 0 20px rgba(80, 200, 120, 0.3);
+    }
+
+    /* Scroll Animation */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .animate-on-scroll.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .btn-group {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .newsletter {
+        flex-direction: column;
+      }
+
+      .newsletter input {
+        min-width: 100%;
+      }
+
+      #roadmap li::before {
+        left: -0.5rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Section -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Solving Homelessness and the Affordable Housing Crisis</h1>
+        <p>A Community-Governed, Crypto-Funded Approach to Inclusive Housing</p>
+        <div class="btn-group">
+          <button class="btn btn-primary">Download Whitepaper</button>
+          <button class="btn btn-secondary">Watch Explainer Video</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Problem Section -->
+  <section id="problem">
+    <div class="container">
+      <div class="animate-on-scroll">
+        <h2>The Problem</h2>
+        <p>Millions lack access to safe, inclusive, and affordable housing. Zoning, funding gaps, and outdated models limit impact.</p>
+        <div class="impact-stats">
+          <div class="stat-card">
+            <span class="stat-number">580K</span>
+            <div class="stat-label">Americans experiencing homelessness</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">7.3M</span>
+            <div class="stat-label">Affordable housing units needed</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">$290B</span>
+            <div class="stat-label">Annual funding gap</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Solution Section -->
+  <section id="solution">
+    <div class="container">
+      <div class="animate-on-scroll">
+        <h2>Our Solution: Habitat DAO</h2>
+        <p>Revolutionary approach combining universal design, community governance, and blockchain technology</p>
+        <div class="solution-cards">
+          <div class="solution-card">
+            <h3>🏠 Universal Design Housing</h3>
+            <p>Accessible, inclusive communities designed for all abilities and income levels</p>
+          </div>
+          <div class="solution-card">
+            <h3>🗳️ Community DAO Governance</h3>
+            <p>Residents participate directly in decision-making through secure blockchain voting</p>
+          </div>
+          <div class="solution-card">
+            <h3>🪙 Dual-Token Crypto Economy</h3>
+            <p>Innovative tokenomics enabling fractional ownership and seamless transactions</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Universal Design Section -->
+  <section id="universal-design">
+    <div class="container">
+      <div class="animate-on-scroll">
+        <h2>Universal Design in Practice</h2>
+        <p>Design that welcomes all. Walkable, accessible, equitable communities for mixed incomes and abilities.</p>
+        <div class="solution-cards">
+          <div class="solution-card">
+            <h3>Accessibility First</h3>
+            <p>Ramps, wide doorways, and adaptive features integrated seamlessly into beautiful design</p>
+          </div>
+          <div class="solution-card">
+            <h3>Mixed Income</h3>
+            <p>Diverse housing options from affordable units to market-rate homes in the same community</p>
+          </div>
+          <div class="solution-card">
+            <h3>Walkable Design</h3>
+            <p>15-minute neighborhoods with essential services accessible by foot or wheelchair</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DAO Governance Section -->
+  <section id="dao-governance">
+    <div class="container">
+      <div class="animate-on-scroll">
+        <h2>Community Governance Through DAO</h2>
+        <p>Residents vote and manage budgets and services through a secure, smart contract-based system.</p>
+        <div class="solution-cards">
+          <div class="solution-card">
+            <h3>Transparent Voting</h3>
+            <p>All community decisions recorded on blockchain for complete transparency</p>
+          </div>
+          <div class="solution-card">
+            <h3>Budget Control</h3>
+            <p>Residents collectively decide how community funds are allocated and spent</p>
+          </div>
+          <div class="solution-card">
+            <h3>Service Management</h3>
+            <p>Direct oversight of maintenance, security, and community programs</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Token System Section -->
+  <section id="tokens">
+    <div class="container">
+      <div class="animate-on-scroll">
+        <h2>Dual-Token System</h2>
+        <div class="token-container">
+          <div class="token-card">
+            <h3>HAT (Habitat Asset Token)</h3>
+            <p>Fractional ownership in property and infrastructure. HAT tokens represent your stake in the community's real estate assets, appreciating in value as the community grows and property values increase.</p>
+          </div>
+          <div class="token-card">
+            <h3>HUSD (Habitat Stablecoin)</h3>
+            <p>Used for daily transactions like rent, groceries, services. HUSD provides price stability for everyday transactions while keeping value within the community ecosystem.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Legal Framework Section -->
+  <section id="legal">
+    <div class="container">
+      <div class="animate-on-scroll">
+        <h2>Legal & Compliance</h2>
+        <ul>
+          <li>Wyoming DAO LLC structure providing legal recognition and liability protection</li>
+          <li>SEC, KYC/AML, and real estate regulation compliance ensuring investor protection</li>
+          <li>Token classification and liability protections under current regulatory framework</li>
+          <li>Partnership agreements with local municipalities and housing authorities</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roadmap Section -->
+  <section id="roadmap">
+    <div class="container">
+      <div class="animate-on-scroll">
+        <h2>Implementation Roadmap</h2>
+        <ol>
+          <li>Form DAO and launch tokens with initial community of 100 founding members</li>
+          <li>Acquire land and build pilot community with 50 units in partnership with local government</li>
+          <li>Deploy governance tools and establish community voting protocols</li>
+          <li>Scale to multiple locations and integrate additional services like healthcare and education</li>
+          <li>Measure and optimize impact through continuous data collection and community feedback</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact Metrics Section -->
+  <section id="impact">
+    <div class="container">
+      <div class="animate-on-scroll">
+        <h2>Impact That Matters</h2>
+        <p>We will track outcomes such as housing units built, DAO participation, and service adoption.</p>
+        <div class="impact-stats">
+          <div class="stat-card">
+            <span class="stat-number">500+</span>
+            <div class="stat-label">Housing Units Planned</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">85%</span>
+            <div class="stat-label">Expected DAO Participation</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">$50M</span>
+            <div class="stat-label">Initial Funding Target</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">3</span>
+            <div class="stat-label">Cities in Phase 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partnership Call to Action -->
+  <section id="collaborate">
+    <div class="container">
+      <div class="animate-on-scroll">
+        <h2>Partner With Us</h2>
+        <p>Join nonprofits, public agencies, and mission-aligned investors in reshaping housing in America.</p>
+        <div class="btn-group">
+          <button class="btn btn-primary">Become a Partner</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer CTA -->
+  <footer>
+    <div class="container">
+      <p>Want updates on the DAO pilot? Subscribe below.</p>
+      <div class="newsletter">
+        <input type="email" placeholder="Your email address" />
+        <button class="btn btn-primary">Subscribe</button>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Smooth scrolling for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Interactive button effects
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        let ripple = document.createElement('span');
+        ripple.style.position = 'absolute';
+        ripple.style.borderRadius = '50%';
+        ripple.style.background = 'rgba(255,255,255,0.3)';
+        ripple.style.transform = 'scale(0)';
+        ripple.style.animation = 'ripple 0.6s linear';
+        ripple.style.left = (e.clientX - e.target.offsetLeft - 25) + 'px';
+        ripple.style.top = (e.clientY - e.target.offsetTop - 25) + 'px';
+        ripple.style.width = ripple.style.height = '50px';
+        
+        this.appendChild(ripple);
+        
+        setTimeout(() => {
+          ripple.remove();
+        }, 600);
+      });
+    });
+
+    // Add ripple animation to CSS
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes ripple {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
