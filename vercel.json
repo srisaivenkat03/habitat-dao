@@ -1,0 +1,12 @@
+{
+  "buildCommand": "npm run vercel-build",
+  "outputDirectory": "dist/public",
+  "framework": "vite",
+  "installCommand": "npm ci",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "github": {
+    "enabled": true
+  }
+}
+
