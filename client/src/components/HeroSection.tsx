@@ -4,11 +4,61 @@ import { Download, Play } from 'lucide-react';
 
 export default function HeroSection() {
   const handleDownloadWhitepaper = () => {
-    console.log('Download whitepaper triggered'); //todo: remove mock functionality
+    const url = 'https://unece.org/sites/default/files/2021-02/Housing%20for%20Migrants_compressed_0.pdf';
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'whitepaper.pdf';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
   };
 
   const handleWatchVideo = () => {
-    console.log('Watch explainer video triggered'); //todo: remove mock functionality
+    const videoUrl = 'https://www.youtube.com/embed/-kJTUI8Fy-0?si=CyzGjolK62Ghbwlj&autoplay=1';
+    const overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.inset = '0';
+    overlay.style.background = 'rgba(0,0,0,0.75)';
+    overlay.style.display = 'flex';
+    overlay.style.alignItems = 'center';
+    overlay.style.justifyContent = 'center';
+    overlay.style.zIndex = '9999';
+
+    const container = document.createElement('div');
+    container.style.width = 'min(900px, 92vw)';
+    container.style.aspectRatio = '16/9';
+    container.style.background = '#000';
+    container.style.borderRadius = '12px';
+    container.style.overflow = 'hidden';
+    container.style.boxShadow = '0 10px 30px rgba(0,0,0,0.4)';
+
+    const iframe = document.createElement('iframe');
+    iframe.src = videoUrl;
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.allowFullscreen = true as any;
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    iframe.frameBorder = '0';
+
+    const close = document.createElement('button');
+    close.textContent = '×';
+    close.setAttribute('aria-label', 'Close');
+    close.style.position = 'absolute';
+    close.style.top = '16px';
+    close.style.right = '24px';
+    close.style.fontSize = '28px';
+    close.style.color = '#fff';
+    close.style.background = 'transparent';
+    close.style.border = 'none';
+    close.style.cursor = 'pointer';
+
+    close.onclick = () => overlay.remove();
+    overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
+
+    container.appendChild(iframe);
+    overlay.appendChild(container);
+    overlay.appendChild(close);
+    document.body.appendChild(overlay);
   };
 
   return (
@@ -67,21 +117,7 @@ export default function HeroSection() {
             </Button>
           </div>
           
-          {/* Trust indicators */}
-          <div className="mt-16 flex flex-wrap justify-center items-center gap-8 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-chart-3 rounded-full"></div>
-              <span>SEC Compliant</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-chart-3 rounded-full"></div>
-              <span>Wyoming DAO LLC</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-chart-3 rounded-full"></div>
-              <span>Audited Smart Contracts</span>
-            </div>
-          </div>
+          
         </motion.div>
       </div>
       
