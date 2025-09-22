@@ -14,8 +14,14 @@ export default function Navigation() {
     }
   };
 
-  const handleConnectWallet = () => {
-    console.log('Connect wallet triggered'); // todo: implement wallet connection
+  const handleDownloadWhitepaper = () => {
+    const url = 'https://unece.org/sites/default/files/2021-02/Housing%20for%20Migrants_compressed_0.pdf';
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'whitepaper.pdf';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
   };
 
   const navItems = [
@@ -68,18 +74,11 @@ export default function Navigation() {
               variant="outline"
               size="sm"
               className="border-chart-2/30 text-chart-2 hover:bg-chart-2 hover:text-white"
+              onClick={handleDownloadWhitepaper}
               data-testid="nav-download-whitepaper"
             >
               <Download className="w-4 h-4 mr-2" />
               Whitepaper
-            </Button>
-            <Button
-              size="sm"
-              className="bg-gradient-to-r from-chart-2 to-chart-3 text-white hover:opacity-90"
-              onClick={handleConnectWallet}
-              data-testid="nav-connect-wallet"
-            >
-              Connect Wallet
             </Button>
           </div>
 
@@ -117,18 +116,11 @@ export default function Navigation() {
                   variant="outline"
                   size="sm"
                   className="border-chart-2/30 text-chart-2 hover:bg-chart-2 hover:text-white"
+                onClick={handleDownloadWhitepaper}
                   data-testid="nav-mobile-download-whitepaper"
                 >
                   <Download className="w-4 h-4 mr-2" />
                   Whitepaper
-                </Button>
-                <Button
-                  size="sm"
-                  className="bg-gradient-to-r from-chart-2 to-chart-3 text-white hover:opacity-90"
-                  onClick={handleConnectWallet}
-                  data-testid="nav-mobile-connect-wallet"
-                >
-                  Connect Wallet
                 </Button>
               </div>
             </div>
