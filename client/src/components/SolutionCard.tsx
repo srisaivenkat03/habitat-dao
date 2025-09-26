@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'wouter';
 import { ReactNode } from 'react';
 
 interface SolutionCardProps {
@@ -6,16 +7,17 @@ interface SolutionCardProps {
   title: string;
   description: string;
   delay?: number;
+  to?: string;
 }
 
-export default function SolutionCard({ icon, title, description, delay = 0 }: SolutionCardProps) {
-  return (
+export default function SolutionCard({ icon, title, description, delay = 0, to }: SolutionCardProps) {
+  const Card = (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay }}
-      className="bg-gradient-to-br from-white via-slate-50/50 to-white dark:from-slate-800 dark:via-slate-900/50 dark:to-slate-800 p-8 rounded-2xl text-center border border-slate-200/50 dark:border-slate-700/50 hover-elevate cursor-pointer group shadow-lg hover:shadow-xl transition-all duration-300"
+      className="p-8 rounded-2xl text-center hover-elevate cursor-pointer group transition-all duration-300"
       data-testid={`solution-card-${title.toLowerCase().replace(/\s+/g, '-')}`}
     >
       <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-chart-2/10 to-chart-3/10 rounded-2xl mb-6 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-chart-2/20 group-hover:to-chart-3/20 transition-all duration-300">
@@ -32,4 +34,10 @@ export default function SolutionCard({ icon, title, description, delay = 0 }: So
       <div className="mt-6 w-8 h-1 bg-gradient-to-r from-chart-2 to-chart-3 rounded-full mx-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
     </motion.div>
   );
+
+  return to ? (
+    <Link href={to} aria-label={title} className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-chart-2 rounded-2xl">
+      {Card}
+    </Link>
+  ) : Card;
 }
