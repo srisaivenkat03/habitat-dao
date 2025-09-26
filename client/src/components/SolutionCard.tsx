@@ -17,10 +17,10 @@ export default function SolutionCard({ icon, title, description, delay = 0, to }
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay }}
-      className="p-8 rounded-2xl text-center hover-elevate cursor-pointer group transition-all duration-300"
+      className="bg-white dark:bg-slate-800 p-8 rounded-2xl text-center border border-slate-200/50 dark:border-slate-700/50 hover-elevate cursor-pointer group shadow-lg hover:shadow-xl transition-all duration-300"
       data-testid={`solution-card-${title.toLowerCase().replace(/\s+/g, '-')}`}
     >
-      <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-chart-2/10 to-chart-3/10 rounded-2xl mb-6 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-chart-2/20 group-hover:to-chart-3/20 transition-all duration-300">
+      <div className="inline-flex items-center justify-center w-16 h-16 bg-white dark:bg-slate-700 rounded-2xl mb-6 group-hover:scale-110 group-hover:bg-slate-50 dark:group-hover:bg-slate-600 transition-all duration-300">
         <div className="text-chart-2 group-hover:text-chart-3 transition-colors duration-300">
           {icon}
         </div>
@@ -31,7 +31,7 @@ export default function SolutionCard({ icon, title, description, delay = 0, to }
       <p className="text-muted-foreground leading-relaxed">
         {description}
       </p>
-      <div className="mt-6 w-8 h-1 bg-gradient-to-r from-chart-2 to-chart-3 rounded-full mx-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      <div className="mt-6 w-8 h-1 bg-slate-300 dark:bg-slate-600 rounded-full mx-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
     </motion.div>
   );
 
